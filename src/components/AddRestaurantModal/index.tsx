@@ -2,10 +2,9 @@ import React, { useCallback, useRef } from 'react';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 
-import firebaseDB from '../../config/firebase';
-
 import Input from '../Input';
 import { BoostrapButton, BootstrapModal } from './styles';
+import { useRestaurant } from '../../context/RestaurantsContext';
 
 // properties of the Modal
 // onHide is the function that is called if the modal close button is clicked
@@ -26,24 +25,19 @@ const AddRestaurantModal: React.FC<AddRestaurantModalProps> = ({
   onHide,
 }) => {
   const formRef = useRef<FormHandles>(null);
-
+  const { add } = useRestaurant();
   // Upon submitting the restaurant, send the data to be saved in the cloud
   const handleSubmit = useCallback(
-    (data: ModalFormData) => {
-      console.log('name', data.name);
-      console.log('address', data.address);
-      console.log('business', data.business);
-
-      // add to the database
-      // TODO: Show an error message if error happens
-      firebaseDB.child('restaurants').push(data, error => {
-        if (error) console.error('restaurant could not be saved');
+    ({ name, address, business }: ModalFormData) => {
+      add({
+        name,
+        address,
+        business,
       });
-
       // close the modal after submitting the form
       onHide();
     },
-    [onHide],
+    [onHide, add],
   );
 
   return (
