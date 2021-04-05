@@ -4,11 +4,6 @@ import Button from 'react-bootstrap/Button';
 
 export const ContainerCol = styled(Col)`
   padding: 1rem;
-
-  /* @media (min-width: 768px) {
-    padding-top: 0;
-    margin-left: 2rem;
-  } */
 `;
 
 export const RestaurantInfo = styled.div`

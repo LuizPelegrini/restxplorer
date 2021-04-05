@@ -5,6 +5,7 @@ export default createGlobalStyle`
     --primary: #93329e;
     --background: #252525;
     --gray: #cccccc;
+    --dark-gray: #232129;
   }
 
   html{
