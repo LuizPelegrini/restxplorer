@@ -13,7 +13,6 @@ export default createGlobalStyle`
 
   body{
     background-color: var(--background);
-    color: #FFF;
     -webkit-font-smoothing: antialiased;
 
     font-size: 1.6rem;
