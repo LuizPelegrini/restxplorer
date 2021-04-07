@@ -5,9 +5,11 @@ import { FiPlus } from 'react-icons/fi';
 import { Container, BootstrapContainer, AddRestaurantButton } from './styles';
 import RestaurantCard from '../../components/RestaurantCard';
 import AddRestaurantModal from '../../components/AddRestaurantModal';
+import { useRestaurant } from '../../context/RestaurantsContext';
 
 const Home: React.FC = () => {
   const [isShown, setIsShown] = useState(false); // to change the state of the modal
+  const { restaurants } = useRestaurant();
 
   // useCallback to avoid creating this function every time the component is updated
   const handleShow = useCallback(() => {
@@ -27,24 +29,10 @@ const Home: React.FC = () => {
         {/* TODO: Filter */}
         <BootstrapContainer>
           <Row>
-            <RestaurantCard />
-            <RestaurantCard />
-            <RestaurantCard />
-            <RestaurantCard />
-            <RestaurantCard />
-            <RestaurantCard />
-            <RestaurantCard />
-            <RestaurantCard />
-            <RestaurantCard />
-            <RestaurantCard />
-            <RestaurantCard />
-            <RestaurantCard />
-            <RestaurantCard />
-            <RestaurantCard />
-            <RestaurantCard />
-            <RestaurantCard />
-            <RestaurantCard />
-            <RestaurantCard />
+            {restaurants &&
+              restaurants.map(res => {
+                return <RestaurantCard key={res.id} />;
+              })}
           </Row>
         </BootstrapContainer>
         <AddRestaurantButton onClick={handleShow}>

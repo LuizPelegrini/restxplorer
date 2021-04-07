@@ -26,6 +26,7 @@ const AddRestaurantModal: React.FC<AddRestaurantModalProps> = ({
 }) => {
   const formRef = useRef<FormHandles>(null);
   const { add } = useRestaurant();
+
   // Upon submitting the restaurant, send the data to be saved in the cloud
   const handleSubmit = useCallback(
     ({ name, address, business }: ModalFormData) => {
