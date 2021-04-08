@@ -31,14 +31,7 @@ const Home: React.FC = () => {
           <Row>
             {restaurants &&
               restaurants.map(res => {
-                return (
-                  <RestaurantCard
-                    key={res.id}
-                    name={res.name}
-                    address={res.address}
-                    business={res.business}
-                  />
-                );
+                return <RestaurantCard key={res.id} info={res} />;
               })}
           </Row>
         </BootstrapContainer>

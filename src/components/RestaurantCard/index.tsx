@@ -1,31 +1,40 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import { ImBin } from 'react-icons/im';
-import { ContainerCol, RestaurantInfo, BootstrapButton } from './styles';
+import {
+  ContainerCol,
+  RestaurantInfoContainer,
+  BootstrapButton,
+} from './styles';
+
+import {
+  useRestaurant,
+  RestaurantInfo,
+} from '../../context/RestaurantsContext';
 
 interface RestaurantCardProps {
-  name: string;
-  business: string;
-  address: string;
+  info: RestaurantInfo;
 }
 
-const RestaurantCard: React.FC<RestaurantCardProps> = ({
-  name,
-  address,
-  business,
-}) => {
+const RestaurantCard: React.FC<RestaurantCardProps> = ({ info }) => {
+  const { remove } = useRestaurant();
+
+  const handleDelete = useCallback(() => {
+    remove(info.id);
+  }, [remove, info.id]);
+
   return (
     <ContainerCol sm={12} md={6}>
-      <RestaurantInfo>
+      <RestaurantInfoContainer>
         <div>
-          <h2>{name}</h2>
-          <p>{business}</p>
-          <p>{address}</p>
+          <h2>{info.name}</h2>
+          <p>{info.business}</p>
+          <p>{info.address}</p>
         </div>
-        <BootstrapButton variant="danger">
+        <BootstrapButton variant="danger" onClick={handleDelete}>
           <ImBin size={12} />
         </BootstrapButton>
-      </RestaurantInfo>
+      </RestaurantInfoContainer>
     </ContainerCol>
   );
 };

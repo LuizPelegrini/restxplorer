@@ -6,7 +6,7 @@ export const ContainerCol = styled(Col)`
   padding: 1rem;
 `;
 
-export const RestaurantInfo = styled.div`
+export const RestaurantInfoContainer = styled.div`
   padding: 1rem;
 
   display: flex;
