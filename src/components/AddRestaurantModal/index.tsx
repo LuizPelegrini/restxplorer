@@ -25,6 +25,7 @@ const AddRestaurantModal: React.FC<AddRestaurantModalProps> = ({
   onHide,
 }) => {
   const formRef = useRef<FormHandles>(null);
+  // use hook to add restaurant from the list
   const { add } = useRestaurant();
 
   // Upon submitting the restaurant, send the data to be saved in the cloud

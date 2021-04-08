@@ -45,13 +45,17 @@ const RestaurantProvider: React.FC = ({ children }) => {
         .once('value');
 
       const data = restaurantData.val();
-      // convert snapshot into an array of RestaurantInfo
-      const restaurants = Object.keys(data).map<RestaurantInfo>(key => ({
-        id: key,
-        ...data[key],
-      }));
 
-      setRestaurantsInfo(restaurants);
+      // if there is no restaurant information in the database, dont update component
+      if (data) {
+        // convert snapshot into an array of RestaurantInfo
+        const restaurants = Object.keys(data).map<RestaurantInfo>(key => ({
+          id: key,
+          ...data[key],
+        }));
+
+        setRestaurantsInfo(restaurants);
+      }
     }
 
     getRestaurantInfo();

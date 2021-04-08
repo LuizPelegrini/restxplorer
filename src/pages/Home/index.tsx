@@ -9,7 +9,7 @@ import { useRestaurant } from '../../context/RestaurantsContext';
 
 const Home: React.FC = () => {
   const [isShown, setIsShown] = useState(false); // to change the state of the modal
-  const { restaurants } = useRestaurant();
+  const { restaurants } = useRestaurant(); // use hook to list restaurants
 
   // useCallback to avoid creating this function every time the component is updated
   const handleShow = useCallback(() => {
