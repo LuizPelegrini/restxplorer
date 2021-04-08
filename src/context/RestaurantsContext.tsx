@@ -1,10 +1,12 @@
 // This is a React Context to encapsulate the logic and data regarding the restaurants added to the application
-import React, { createContext, useContext, useState, useCallback } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+} from 'react';
 import firebaseDB from '../config/firebase';
-
-interface RestaurantState {
-  restaurants: RestaurantInfo[];
-}
 
 // basic data for every restaurant item
 interface RestaurantInfo {
@@ -13,6 +15,10 @@ interface RestaurantInfo {
   address: string;
   business: string;
 }
+
+// TODO: Popular os dados do restaurante no componente RestaurantCard
+// Dentro do useState da linha 33, buscar as informacoes do Firebase e ja colocar no state
+// Remover um restaurante da lista (e consequentemente do banco)
 
 // the context data & logic that will be accessible by the components of the application
 interface RestaurantContextData {
@@ -27,8 +33,27 @@ const RestaurantContext = createContext<RestaurantContextData>(
 );
 
 const RestaurantProvider: React.FC = ({ children }) => {
-  // TODO: Create logic to add/remove restaurants using Firebase
-  const [data, setData] = useState<RestaurantState>({} as RestaurantState);
+  const [restaurantsInfo, setRestaurantsInfo] = useState<RestaurantInfo[]>([]);
+
+  // Upon component is mounted, fetch data from database
+  useEffect(() => {
+    async function getRestaurantInfo() {
+      const restaurantData = await firebaseDB
+        .child('restaurants')
+        .once('value');
+
+      const data = restaurantData.val();
+      // convert snapshot into an array of RestaurantInfo
+      const restaurants = Object.keys(data).map<RestaurantInfo>(key => ({
+        id: key,
+        ...data[key],
+      }));
+
+      setRestaurantsInfo(restaurants);
+    }
+
+    getRestaurantInfo();
+  }, []);
 
   // Add a new restaurant to database
   const add = useCallback(
@@ -47,18 +72,14 @@ const RestaurantProvider: React.FC = ({ children }) => {
             };
 
             // update context component state
-            setData(prevState => {
-              return {
-                restaurants: [...(prevState.restaurants || []), newRestaurant],
-              } as RestaurantState;
-            });
+            setRestaurantsInfo([...restaurantsInfo, newRestaurant]);
           },
           error => {
             console.error('Error on saving restaurant', error);
           },
         );
     },
-    [],
+    [restaurantsInfo],
   );
 
   const remove = useCallback((id: string) => {
@@ -67,7 +88,7 @@ const RestaurantProvider: React.FC = ({ children }) => {
 
   return (
     <RestaurantContext.Provider
-      value={{ restaurants: data.restaurants, add, remove }}
+      value={{ restaurants: restaurantsInfo, add, remove }}
     >
       {children}
     </RestaurantContext.Provider>
