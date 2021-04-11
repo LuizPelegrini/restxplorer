@@ -13,14 +13,13 @@ import {
   useRestaurant,
 } from '../../context/RestaurantsContext';
 
-// React -> criar o layout da pagina
-// React -> criar botao para sortear um restaurante adicionado
-// React -> mostrar modal com as informacoes do restaurante sorteado
-// React -> adicionar restaurante sorteado na lista de sorteados
-// React -> criar Context para termos tudo relacionado aos restaurantes sorteados ali dentro (metodo de sorteio, restaurantes sorteados)
+// [] React -> criar o layout da pagina
+// [x] React -> criar botao para sortear um restaurante adicionado
+// [] React -> mostrar modal com as informacoes do restaurante sorteado
+// [] React -> adicionar restaurante sorteado na lista de sorteados
 
-// firebase -> criar outra referencia contendo os restaurantes sorteados
-// firebase -> inserir restaurante sorteado na referencia
+// [x] firebase -> criar outra referencia contendo os restaurantes sorteados
+// [x] firebase -> inserir restaurante sorteado na referencia
 
 const Picker: React.FC = () => {
   const { restaurants } = useRestaurant();

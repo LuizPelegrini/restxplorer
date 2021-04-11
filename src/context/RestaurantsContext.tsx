@@ -20,6 +20,7 @@ export interface RestaurantInfo {
   name: string;
   address: string;
   business: string;
+  price: number;
   pickedState: RestaurantPickedState;
 }
 
@@ -27,6 +28,7 @@ interface RestaurantDTO {
   name: string;
   address: string;
   business: string;
+  price: number;
 }
 
 // the context data & logic that will be accessible by the components of the application
@@ -69,7 +71,7 @@ const RestaurantProvider: React.FC = ({ children }) => {
 
   // Add a new restaurant to database
   const add = useCallback(
-    ({ name, business, address }: RestaurantDTO) => {
+    ({ name, business, address, price }: RestaurantDTO) => {
       // generating a unique identifier
       const id = uuid();
       const pickedState = {
@@ -79,7 +81,7 @@ const RestaurantProvider: React.FC = ({ children }) => {
 
       firebaseRestaurantsRef
         .child(id) // adding custom id
-        .set({ name, business, address, pickedState }) // saving restaurant info
+        .set({ name, business, address, price, pickedState }) // saving restaurant info
         .then(
           // if the operation has completed successfully, then update the state
           success => {
@@ -88,6 +90,7 @@ const RestaurantProvider: React.FC = ({ children }) => {
               name,
               business,
               address,
+              price,
               pickedState,
             };
 
@@ -129,6 +132,7 @@ const RestaurantProvider: React.FC = ({ children }) => {
       name,
       address,
       business,
+      price,
       pickedState: { timesPicked },
     } = restaurantsInfo[randomIndex];
 
@@ -157,6 +161,7 @@ const RestaurantProvider: React.FC = ({ children }) => {
       name,
       address,
       business,
+      price,
     };
   }, [restaurantsInfo, firebaseRestaurantsRef]);
 

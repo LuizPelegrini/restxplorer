@@ -27,3 +27,8 @@ export const AddRestaurantButton = styled(Button)`
   border-radius: 50%;
   padding: 1.2rem;
 `;
+
+export const FilterContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;

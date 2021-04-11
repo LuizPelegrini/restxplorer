@@ -18,6 +18,7 @@ interface ModalFormData {
   name: string;
   address: string;
   business: string;
+  price: number;
 }
 
 const AddRestaurantModal: React.FC<AddRestaurantModalProps> = ({
@@ -30,11 +31,12 @@ const AddRestaurantModal: React.FC<AddRestaurantModalProps> = ({
 
   // Upon submitting the restaurant, send the data to be saved in the cloud
   const handleSubmit = useCallback(
-    ({ name, address, business }: ModalFormData) => {
+    ({ name, address, business, price }: ModalFormData) => {
       add({
         name,
         address,
         business,
+        price,
       });
       // close the modal after submitting the form
       onHide();
@@ -50,6 +52,7 @@ const AddRestaurantModal: React.FC<AddRestaurantModalProps> = ({
           <Input name="name" placeholder="Name" />
           <Input name="address" placeholder="Address" />
           <Input name="business" placeholder="Business" />
+          <Input name="price" placeholder="Price" />
           <BoostrapButton type="submit">Add</BoostrapButton>
         </Form>
       </BootstrapModal.Body>
