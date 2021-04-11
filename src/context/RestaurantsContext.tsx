@@ -72,10 +72,14 @@ const RestaurantProvider: React.FC = ({ children }) => {
     ({ name, business, address }: RestaurantDTO) => {
       // generating a unique identifier
       const id = uuid();
+      const pickedState = {
+        lastTimePicked: -1,
+        timesPicked: 0,
+      };
 
       firebaseRestaurantsRef
         .child(id) // adding custom id
-        .set({ name, business, address }) // saving restaurant info
+        .set({ name, business, address, pickedState }) // saving restaurant info
         .then(
           // if the operation has completed successfully, then update the state
           success => {
@@ -84,10 +88,7 @@ const RestaurantProvider: React.FC = ({ children }) => {
               name,
               business,
               address,
-              pickedState: {
-                lastTimePicked: -1,
-                timesPicked: 0,
-              },
+              pickedState,
             };
 
             // update context component state
@@ -123,22 +124,41 @@ const RestaurantProvider: React.FC = ({ children }) => {
     if (restaurantsInfo.length === 0) return null;
 
     const randomIndex = Math.floor(Math.random() * restaurantsInfo.length);
-    const { id, name, address, business } = restaurantsInfo[randomIndex];
+    const {
+      id,
+      name,
+      address,
+      business,
+      pickedState: { timesPicked },
+    } = restaurantsInfo[randomIndex];
 
-    firebaseDB.child('');
+    const pickedState: RestaurantPickedState = {
+      lastTimePicked: Date.now(),
+      timesPicked: timesPicked + 1,
+    };
 
-    console.table([
-      ['name', name],
-      ['address', address],
-      ['business', business],
-    ]);
+    firebaseRestaurantsRef
+      .child(id)
+      .update({ pickedState })
+      .then(
+        success => {
+          const updatedRestaurantInfo = restaurantsInfo.map(res => {
+            return res.id === id ? { ...res, pickedState } : res;
+          });
+
+          setRestaurantsInfo(updatedRestaurantInfo);
+        },
+        error => {
+          console.error('Error on updating restaurant', error);
+        },
+      );
 
     return {
       name,
       address,
       business,
     };
-  }, [restaurantsInfo]);
+  }, [restaurantsInfo, firebaseRestaurantsRef]);
 
   return (
     <RestaurantContext.Provider

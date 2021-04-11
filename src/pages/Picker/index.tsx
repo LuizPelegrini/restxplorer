@@ -1,9 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Row from 'react-bootstrap/Row';
+import { GiPerspectiveDiceSixFacesRandom } from 'react-icons/gi';
 
 import RestaurantCard from '../../components/RestaurantCard';
-import { Container, BootstrapContainer } from './styles';
-import { useRestaurant } from '../../context/RestaurantsContext';
+import {
+  Container,
+  BootstrapContainer,
+  PickRandomRestaurantButton,
+} from './styles';
+import {
+  RestaurantInfo,
+  useRestaurant,
+} from '../../context/RestaurantsContext';
 
 // React -> criar o layout da pagina
 // React -> criar botao para sortear um restaurante adicionado
@@ -15,16 +23,32 @@ import { useRestaurant } from '../../context/RestaurantsContext';
 // firebase -> inserir restaurante sorteado na referencia
 
 const Picker: React.FC = () => {
-  const { draw } = useRestaurant();
+  const { restaurants } = useRestaurant();
+  const [pickedRestaurants, setPickedRestaurants] = useState<RestaurantInfo[]>(
+    [],
+  );
 
   useEffect(() => {
-    draw();
-  }, [draw]);
+    const temp = restaurants.filter(res => res.pickedState.timesPicked > 0);
+    setPickedRestaurants(temp);
+  }, [restaurants]);
 
   return (
     <Container>
-      <h1>Picker</h1>
-      <BootstrapContainer />
+      <h1>History</h1>
+      <BootstrapContainer>
+        <Row>
+          {pickedRestaurants &&
+            pickedRestaurants.map(res => (
+              <RestaurantCard key={res.id} info={res}>
+                {res.name}
+              </RestaurantCard>
+            ))}
+        </Row>
+      </BootstrapContainer>
+      <PickRandomRestaurantButton>
+        <GiPerspectiveDiceSixFacesRandom size={20} />
+      </PickRandomRestaurantButton>
     </Container>
   );
 };

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Container as ContainerBS } from 'react-bootstrap';
+import { Container as ContainerBS, Button } from 'react-bootstrap';
 
 export const Container = styled.div`
   position: relative; // to accomodate the add button at the bottom of the container
@@ -17,4 +17,13 @@ export const BootstrapContainer = styled(ContainerBS)`
   flex: 1;
   flex-basis: 0; // avoid container to expand beyond the screen height
   overflow-y: auto;
+`;
+
+export const PickRandomRestaurantButton = styled(Button)`
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+
+  border-radius: 50%;
+  padding: 1.2rem;
 `;

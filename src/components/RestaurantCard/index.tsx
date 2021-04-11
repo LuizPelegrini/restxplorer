@@ -14,9 +14,13 @@ import {
 
 interface RestaurantCardProps {
   info: RestaurantInfo;
+  deleteButton?: boolean; // should this component show the delete button?
 }
 
-const RestaurantCard: React.FC<RestaurantCardProps> = ({ info }) => {
+const RestaurantCard: React.FC<RestaurantCardProps> = ({
+  info,
+  deleteButton,
+}) => {
   // use hook to remove restaurant from the list
   const { remove } = useRestaurant();
 
@@ -32,9 +36,11 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({ info }) => {
           <p>{info.business}</p>
           <p>{info.address}</p>
         </div>
-        <BootstrapButton variant="danger" onClick={handleDelete}>
-          <ImBin size={12} />
-        </BootstrapButton>
+        {deleteButton && (
+          <BootstrapButton variant="danger" onClick={handleDelete}>
+            <ImBin size={12} />
+          </BootstrapButton>
+        )}
       </RestaurantInfoContainer>
     </ContainerCol>
   );
