@@ -17,6 +17,7 @@ interface RestaurantCardProps {
 }
 
 const RestaurantCard: React.FC<RestaurantCardProps> = ({ info }) => {
+  // use hook to remove restaurant from the list
   const { remove } = useRestaurant();
 
   const handleDelete = useCallback(() => {
