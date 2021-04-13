@@ -11,6 +11,11 @@ export const Container = styled.div`
   width: 100%;
   max-width: 960px;
   margin: 0 auto;
+
+  .header {
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid #ccc;
+  }
 `;
 
 export const BootstrapContainer = styled(ContainerBS)`

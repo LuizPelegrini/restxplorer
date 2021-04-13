@@ -2,8 +2,6 @@ import styled from 'styled-components';
 import { Container as ContainerBS, Button } from 'react-bootstrap';
 
 export const Container = styled.div`
-  position: relative; // to accomodate the add button at the bottom of the container
-
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -20,10 +18,22 @@ export const BootstrapContainer = styled(ContainerBS)`
 `;
 
 export const PickRandomRestaurantButton = styled(Button)`
-  position: absolute;
-  bottom: 2rem;
-  right: 2rem;
-
   border-radius: 50%;
   padding: 1.2rem;
+`;
+
+export const PickerSection = styled.div`
+  /* background-color: red; */
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  box-shadow: 0 -4px 5px #ccc;
+
+  div {
+    span {
+      margin-right: 8px;
+    }
+  }
 `;

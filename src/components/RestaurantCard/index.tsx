@@ -35,6 +35,7 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({
           <h2>{info.name}</h2>
           <p>{info.business}</p>
           <p>{info.address}</p>
+          <p>~RM{info.price}</p>
         </div>
         {deleteButton && (
           <BootstrapButton variant="danger" onClick={handleDelete}>

@@ -24,7 +24,7 @@ export interface RestaurantInfo {
   pickedState: RestaurantPickedState;
 }
 
-interface RestaurantDTO {
+export interface RestaurantDTO {
   name: string;
   address: string;
   business: string;
@@ -36,7 +36,7 @@ interface RestaurantContextData {
   restaurants: RestaurantInfo[]; // all the restaurants saved in the application
   add: (data: RestaurantDTO) => void; // add a new restaurant
   remove: (id: string) => void; // remove a restaurant with the given id
-  draw: () => RestaurantDTO | null; // randomly pick a restaurant
+  draw: (filter: number) => RestaurantDTO; // randomly pick a restaurant
 }
 
 // initialize the context
@@ -123,47 +123,57 @@ const RestaurantProvider: React.FC = ({ children }) => {
   );
 
   // randomly pick a restaurant from a set
-  const draw = useCallback((): RestaurantDTO | null => {
-    if (restaurantsInfo.length === 0) return null;
-
-    const randomIndex = Math.floor(Math.random() * restaurantsInfo.length);
-    const {
-      id,
-      name,
-      address,
-      business,
-      price,
-      pickedState: { timesPicked },
-    } = restaurantsInfo[randomIndex];
-
-    const pickedState: RestaurantPickedState = {
-      lastTimePicked: Date.now(),
-      timesPicked: timesPicked + 1,
-    };
-
-    firebaseRestaurantsRef
-      .child(id)
-      .update({ pickedState })
-      .then(
-        success => {
-          const updatedRestaurantInfo = restaurantsInfo.map(res => {
-            return res.id === id ? { ...res, pickedState } : res;
-          });
-
-          setRestaurantsInfo(updatedRestaurantInfo);
-        },
-        error => {
-          console.error('Error on updating restaurant', error);
-        },
+  const draw = useCallback(
+    (filterValue: number): RestaurantDTO => {
+      console.log(filterValue);
+      // filter out the restaurants that has a price greater than the filter specified
+      const restaurantsToPickFrom = restaurantsInfo.filter(
+        res => filterValue < 0 || res.price <= filterValue,
+      );
+      const randomIndex = Math.floor(
+        Math.random() * restaurantsToPickFrom.length,
       );
 
-    return {
-      name,
-      address,
-      business,
-      price,
-    };
-  }, [restaurantsInfo, firebaseRestaurantsRef]);
+      const {
+        id,
+        name,
+        address,
+        business,
+        price,
+        pickedState: { timesPicked },
+      } = restaurantsToPickFrom[randomIndex];
+
+      // create the last picked information
+      const pickedState: RestaurantPickedState = {
+        lastTimePicked: Date.now(),
+        timesPicked: timesPicked + 1,
+      };
+
+      firebaseRestaurantsRef
+        .child(id)
+        .update({ pickedState })
+        .then(
+          success => {
+            const updatedRestaurantInfo = restaurantsInfo.map(res => {
+              return res.id === id ? { ...res, pickedState } : res;
+            });
+
+            setRestaurantsInfo(updatedRestaurantInfo);
+          },
+          error => {
+            console.error('Error on updating restaurant', error);
+          },
+        );
+
+      return {
+        name,
+        address,
+        business,
+        price,
+      };
+    },
+    [restaurantsInfo, firebaseRestaurantsRef],
+  );
 
   return (
     <RestaurantContext.Provider

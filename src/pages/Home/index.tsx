@@ -42,7 +42,7 @@ const Home: React.FC = () => {
       <AddRestaurantModal isShown={isShown} onHide={handleClose} />
 
       <Container>
-        <BootstrapContainer>
+        <div className="header">
           <h1>Restaurants</h1>
           <FilterContainer>
             <span>Price Filter:</span>
@@ -55,8 +55,11 @@ const Home: React.FC = () => {
               <ToggleButton value={-1}>All</ToggleButton>
               <ToggleButton value={10}>Less 10</ToggleButton>
               <ToggleButton value={20}>Less 20</ToggleButton>
+              <ToggleButton value={30}>Less 30</ToggleButton>
             </ToggleButtonGroup>
           </FilterContainer>
+        </div>
+        <BootstrapContainer>
           <Row>
             {restaurants &&
               restaurants.map(res => {

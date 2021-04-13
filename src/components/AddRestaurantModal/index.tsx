@@ -52,7 +52,7 @@ const AddRestaurantModal: React.FC<AddRestaurantModalProps> = ({
           <Input name="name" placeholder="Name" />
           <Input name="address" placeholder="Address" />
           <Input name="business" placeholder="Business" />
-          <Input name="price" placeholder="Price" />
+          <Input name="price" placeholder="Price" type="number" />
           <BoostrapButton type="submit">Add</BoostrapButton>
         </Form>
       </BootstrapModal.Body>
