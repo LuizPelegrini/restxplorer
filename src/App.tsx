@@ -7,6 +7,8 @@ import BottomBar from './components/BottomBar';
 import { RestaurantProvider } from './context/RestaurantsContext'; // provider for the restaurants data
 
 const App: React.FC = () => {
+  console.log(process.env.FIREBASE_API_KEY);
+
   return (
     <BrowserRouter>
       <RestaurantProvider>
