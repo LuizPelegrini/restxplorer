@@ -10,6 +10,8 @@ export const BoostrapButton = styled(Button)`
   border-radius: 40px;
   text-transform: uppercase;
   padding: 1rem 0;
+  background-color: var(--pallete-lighter);
+  border-color: transparent;
 
   // to center button at the bottom of the modal
   left: 50%;
@@ -19,7 +21,10 @@ export const BoostrapButton = styled(Button)`
 // target the modal content, to change its borders
 export const BootstrapModal = styled(Modal)`
   .modal-content {
+    background-color: var(--pallete-darker);
+    color: var(--white);
     border-radius: 10px;
+    border: 1px solid var(--pallete-lighter);
   }
 
   .modal-body {
@@ -29,5 +34,26 @@ export const BootstrapModal = styled(Modal)`
   .modal-header {
     font-size: 2rem;
     font-weight: bold;
+    border-bottom: 0;
+
+    .close {
+      color: var(--white);
+    }
+  }
+
+  .input-group-prepend {
+    width: 100%;
+
+    .input-group-text {
+      justify-content: center;
+      width: 50px;
+      font-size: 1.5rem;
+      background-color: var(--pallete-light);
+      border-color: var(--pallete-light);
+      color: var(--white);
+
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+    }
   }
 `;

@@ -8,13 +8,21 @@ export const ContainerCol = styled(Col)`
 
 export const RestaurantInfoContainer = styled.div`
   padding: 1rem;
+  background-color: var(--pallete-darker);
 
   display: flex;
   border-radius: 0.5rem;
-  background-color: var(--white);
 
   div {
     flex: 1;
+
+    h2 {
+      margin-bottom: 1.3rem;
+    }
+
+    p {
+      margin: 0;
+    }
   }
 `;
 

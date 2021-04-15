@@ -2,10 +2,13 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   height: 60px;
-  width: 100%;
-  background-color: var(--primary);
+  background-color: var(--pallete-dark);
   border-top-left-radius: 2rem;
   border-top-right-radius: 2rem;
+
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
 
   ul {
     list-style: none;
@@ -24,12 +27,12 @@ export const Container = styled.div`
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        color: var(--white);
+        color: var(--shadow);
 
         font-size: 1.2rem;
 
         &:focus {
-          color: var(--gray);
+          color: var(--pallete-lighter);
           text-decoration: none;
         }
       }

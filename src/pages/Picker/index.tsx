@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import Row from 'react-bootstrap/Row';
-import ToggleButton from 'react-bootstrap/ToggleButton';
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import { GiPerspectiveDiceSixFacesRandom } from 'react-icons/gi';
 
@@ -10,6 +9,7 @@ import {
   BootstrapContainer,
   PickRandomRestaurantButton,
   PickerSection,
+  BoostrapToggleButton,
 } from './styles';
 import {
   RestaurantDTO,
@@ -65,8 +65,8 @@ const Picker: React.FC = () => {
       />
 
       <Container>
+        <h1>History</h1>
         <BootstrapContainer>
-          <h1>History</h1>
           <Row>
             {pickedRestaurants &&
               pickedRestaurants.map(res => (
@@ -78,17 +78,17 @@ const Picker: React.FC = () => {
         </BootstrapContainer>
         <PickerSection>
           <div>
-            <span>Filter:</span>
+            <span>Draw Filter:</span>
             <ToggleButtonGroup
               onChange={changeFilter}
               type="radio"
               name="hey"
               defaultValue={-1}
             >
-              <ToggleButton value={-1}>All</ToggleButton>
-              <ToggleButton value={10}>Less 10</ToggleButton>
-              <ToggleButton value={20}>Less 20</ToggleButton>
-              <ToggleButton value={30}>Less 30</ToggleButton>
+              <BoostrapToggleButton value={-1}>All</BoostrapToggleButton>
+              <BoostrapToggleButton value={10}>Less 10</BoostrapToggleButton>
+              <BoostrapToggleButton value={20}>Less 20</BoostrapToggleButton>
+              <BoostrapToggleButton value={30}>Less 30</BoostrapToggleButton>
             </ToggleButtonGroup>
           </div>
           <PickRandomRestaurantButton>

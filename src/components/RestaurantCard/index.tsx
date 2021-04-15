@@ -29,13 +29,21 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({
   }, [remove, info.id]);
 
   return (
-    <ContainerCol sm={12} md={6}>
+    <ContainerCol sm={12}>
       <RestaurantInfoContainer>
         <div>
           <h2>{info.name}</h2>
-          <p>{info.business}</p>
-          <p>{info.address}</p>
-          <p>~RM{info.price}</p>
+          <p>
+            <strong>Business: </strong>
+            {info.business}
+          </p>
+          <p>
+            <strong>Address: </strong>
+            {info.address}
+          </p>
+          <p>
+            <strong>Price: </strong>RM {info.price}
+          </p>
         </div>
         {deleteButton && (
           <BootstrapButton variant="danger" onClick={handleDelete}>

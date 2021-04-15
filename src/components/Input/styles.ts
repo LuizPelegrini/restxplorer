@@ -1,8 +1,14 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  border: 2px solid var(--dark-gray);
+  border: 1px solid var(--pallete-light);
   border-radius: 10px;
+
+  &.price-input {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    flex: 1;
+  }
 
   & + div {
     margin-top: 8px;
@@ -13,6 +19,7 @@ export const Container = styled.div`
     padding: 1rem;
     border: 0;
     background-color: transparent;
+    color: var(--white);
 
     &:focus {
       box-shadow: none;

@@ -1,8 +1,13 @@
 import styled from 'styled-components';
-import { Container as ContainerBS, Button } from 'react-bootstrap';
+import {
+  Container as ContainerBS,
+  Button,
+  ToggleButton,
+} from 'react-bootstrap';
 
 export const Container = styled.div`
   position: relative; // to accomodate the add button at the bottom of the container
+  color: var(--white);
 
   flex: 1;
   display: flex;
@@ -14,7 +19,7 @@ export const Container = styled.div`
 
   .header {
     padding: 0.8rem 1rem;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 2px solid var(--pallete-darker);
   }
 `;
 
@@ -26,11 +31,35 @@ export const BootstrapContainer = styled(ContainerBS)`
 
 export const AddRestaurantButton = styled(Button)`
   position: absolute;
-  bottom: 2rem;
-  right: 2rem;
+  bottom: 1.4rem;
+  right: 1.4rem;
+  background-color: var(--pallete-lighter);
+  border-color: transparent;
 
   border-radius: 50%;
   padding: 1.2rem;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: var(--pallete-lighter) !important;
+    border-color: transparent !important;
+  }
+`;
+
+export const BoostrapToggleButton = styled(ToggleButton)`
+  background-color: var(--pallete-lighter);
+  border-color: transparent !important;
+
+  &.active {
+    background-color: var(--pallete-light) !important;
+  }
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: var(--pallete-light) !important;
+  }
 `;
 
 export const FilterContainer = styled.div`

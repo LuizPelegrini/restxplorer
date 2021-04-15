@@ -6,6 +6,14 @@ export default createGlobalStyle`
     --background: #f2f2f2;
     --gray: #cccccc;
     --dark-gray: #232129;
+    --shadow: #adadad;
+
+    --white: #cfcfcf;
+    --pallete-darkest: #1f1327;
+    --pallete-darker: #311d3f;
+    --pallete-dark: #522546;
+    --pallete-light: #88304e;
+    --pallete-lighter: #e23e57;
   }
 
   html{
@@ -13,7 +21,7 @@ export default createGlobalStyle`
   }
 
   body{
-    background-color: var(--background);
+    background-color: var(--pallete-darkest);
     -webkit-font-smoothing: antialiased;
 
     font-size: 1.6rem;

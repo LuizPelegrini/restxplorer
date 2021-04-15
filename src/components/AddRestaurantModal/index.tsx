@@ -1,6 +1,7 @@
 import React, { useCallback, useRef } from 'react';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
+import InputGroup from 'react-bootstrap/InputGroup';
 
 import Input from '../Input';
 import { BoostrapButton, BootstrapModal } from './styles';
@@ -46,13 +47,23 @@ const AddRestaurantModal: React.FC<AddRestaurantModalProps> = ({
 
   return (
     <BootstrapModal show={isShown} onHide={onHide} centered>
-      <BootstrapModal.Header closeButton>Add Restaurant</BootstrapModal.Header>
+      <BootstrapModal.Header closeButton>New Restaurant</BootstrapModal.Header>
       <BootstrapModal.Body>
         <Form ref={formRef} onSubmit={handleSubmit}>
           <Input name="name" placeholder="Name" />
           <Input name="address" placeholder="Address" />
           <Input name="business" placeholder="Business" />
-          <Input name="price" placeholder="Price" type="number" />
+          <InputGroup>
+            <InputGroup.Prepend>
+              <InputGroup.Text>RM</InputGroup.Text>
+              <Input
+                name="price"
+                placeholder="Price"
+                type="number"
+                className="price-input"
+              />
+            </InputGroup.Prepend>
+          </InputGroup>
           <BoostrapButton type="submit">Add</BoostrapButton>
         </Form>
       </BootstrapModal.Body>

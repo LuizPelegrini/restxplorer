@@ -19,10 +19,17 @@ const PickRestaurantModal: React.FC<PickRestaurantModalProps> = ({
 }) => {
   return (
     <BootstrapModal show={isShown} onHide={onHide} centered>
-      <BootstrapModal.Header closeButton>Pick Restaurant</BootstrapModal.Header>
+      <BootstrapModal.Header closeButton>
+        Chosen Restaurant
+      </BootstrapModal.Header>
       <BootstrapModal.Body>
-        {restaurantInfo.price}
-        {restaurantInfo.name}
+        <p>
+          <strong>Name: </strong>
+          {restaurantInfo.name}
+        </p>
+        <p>
+          <strong>Price: </strong>RM{restaurantInfo.price}
+        </p>
         <BoostrapButton type="submit" onClick={onHide}>
           Let&apos;s Eat!
         </BoostrapButton>
